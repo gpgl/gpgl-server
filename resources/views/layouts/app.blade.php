@@ -43,7 +43,10 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        @unless (Auth::guest())
                         <li><a href="{{ route('databases.index') }}">Databases</a></li>
+                        <li><a href="{{ route('tokens') }}">Tokens</a></li>
+                        @endunless
                     </ul>
 
                     <!-- Right Side Of Navbar -->
