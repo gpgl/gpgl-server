@@ -18,12 +18,14 @@ class CreateDatabasesTable extends Migration
             $table->timestamps();
 
             $table->string('name');
-            $table->string('public_key');
+            $table->string('fingerprint');
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+
+            $table->unique(['user_id', 'name']);
         });
     }
 

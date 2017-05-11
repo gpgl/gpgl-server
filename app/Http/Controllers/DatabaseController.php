@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Database;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateDatabase;
 
 class DatabaseController extends Controller
 {
@@ -19,7 +20,7 @@ class DatabaseController extends Controller
      */
     public function index()
     {
-        return view('database.index');
+        return view('databases.index');
     }
 
     /**
@@ -29,18 +30,20 @@ class DatabaseController extends Controller
      */
     public function create()
     {
-        //
+        return view('databases.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\CreateDatabase  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDatabase $request)
     {
-        //
+        $database = new Database($request->all());
+        $request->user()->databases()->save($database);
+        return redirect(route('databases.show', $database));
     }
 
     /**
