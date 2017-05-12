@@ -20,7 +20,11 @@ class DatabaseController extends Controller
      */
     public function index()
     {
-        return view('databases.index');
+        $data = [
+            'databases' => Database::all(),
+        ];
+
+        return view('databases.index', $data);
     }
 
     /**
