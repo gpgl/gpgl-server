@@ -47,7 +47,7 @@ class DatabaseController extends Controller
     {
         $database = new Database($request->all());
         $request->user()->databases()->save($database);
-        return redirect(route('databases.show', $database));
+        return redirect(route('databases.index'));
     }
 
     /**
@@ -92,6 +92,10 @@ class DatabaseController extends Controller
      */
     public function destroy(Database $database)
     {
-        //
+        if ($database->delete()) {
+            return response(null, 204);
+        }
+
+        return abort(500);
     }
 }
