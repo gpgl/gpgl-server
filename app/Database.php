@@ -17,6 +17,11 @@ class Database extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function blobs()
+    {
+        return $this->hasMany(Blob::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -19,7 +19,7 @@ class DatabasePolicy
      */
     public function view(User $user, Database $database)
     {
-        return $database->user == $user;
+        return $database->user->id === $user->id;
     }
 
     /**
@@ -42,7 +42,7 @@ class DatabasePolicy
      */
     public function update(User $user, Database $database)
     {
-        return $database->user == $user;
+        return $database->user->id === $user->id;
     }
 
     /**
@@ -54,6 +54,6 @@ class DatabasePolicy
      */
     public function delete(User $user, Database $database)
     {
-        return $database->user == $user;
+        return $database->user->id === $user->id;
     }
 }

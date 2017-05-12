@@ -69,7 +69,7 @@ class DatabaseController extends Controller
      */
     public function edit(Database $database)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -81,7 +81,7 @@ class DatabaseController extends Controller
      */
     public function update(Request $request, Database $database)
     {
-        //
+        return abort(404);
     }
 
     /**

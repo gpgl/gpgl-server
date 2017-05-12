@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], function(){
+    Route::group(['prefix' => 'databases'], function(){
+        Route::name('blobs.show')->get('/{database}', 'BlobController@show');
+        Route::name('blobs.update')->put('/{database}', 'BlobController@update');
+    });
+});
