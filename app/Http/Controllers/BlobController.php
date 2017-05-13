@@ -40,6 +40,9 @@ class BlobController extends Controller
      */
     public function update(Request $request, Database $database)
     {
-        //
+        $blob = new Blob;
+        $blob->gpgldb = $request->getContent();
+        $database->blobs()->save($blob);
+        return response(null, 204);
     }
 }
