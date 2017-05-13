@@ -21,8 +21,14 @@ class BlobController extends Controller
      */
     public function show(Database $database)
     {
-        $gpgldb = $database->blobs()->latest()->first()->gpgldb;
-        return response($gpgldb)->header('Content-Type', 'application/pgp-encrypted');
+        $blob = $database->blobs()->latest()->first();
+
+        if (!empty($blob->gpgldb)) {
+            return response($blob->gpgldb)
+                ->header('Content-Type', 'application/pgp-encrypted');
+        }
+
+        return abort(404);
     }
 
     /**
