@@ -28,7 +28,7 @@ class BlobController extends Controller
                 ->header('Content-Type', 'application/pgp-encrypted');
         }
 
-        return abort(404);
+        return response(null, 204);
     }
 
     /**
