@@ -2,7 +2,25 @@
 
 This is the HTTP server for [console client][1] remote push and pull.
 
-## Installation
+## Docker Installation
+
+The best way to install is with [docker][3].
+
+First download [docker-compose.yml][4].
+
+Next bring up the network:
+
+    docker-compose up -d
+
+Then run the setup script.
+
+    docker-compose run --rm gpglserver setup
+
+There are many default environment variables which you can override.
+
+    GPGL_SERVER_PORT=8080 docker-compose up -d
+
+## Manual Installation
 
 Follow the documentation for [installing a Laravel application][1].
 
@@ -38,3 +56,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 [1]:https://github.com/gpgl/console
 [2]:https://laravel.com/docs/5.4#installation
+[3]:https://www.docker.com/
+[4]:./docker/docker-compose.yml

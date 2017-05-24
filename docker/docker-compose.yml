@@ -1,0 +1,56 @@
+version: '2.1'
+services:
+  gpglserver:
+    container_name: gpgl_server
+    image: gpgl/server
+    ports:
+      - "${GPGL_SERVER_PORT:-80}:80"
+    networks:
+      - gpglnetwork
+    links:
+      - gpglmysql
+    environment:
+      - APP_ENV="${GPGL_APP_ENV:-production}"
+      - DB_CONNECTION="${GPGL_DB_CONNECTION:-mysql}"
+      - DB_HOST="${GPGL_DB_HOST:-gpglmysql}"
+      - DB_PORT="${GPGL_DB_PORT:-3306}"
+      - DB_DATABASE="${GPGL_MYSQL_DATABASE:-homestead}"
+      - DB_USERNAME="${GPGL_MYSQL_USER:-homestead}"
+      - DB_PASSWORD="${GPGL_MYSQL_PASSWORD:-secret}"
+      - BROADCAST_DRIVER="${GPGL_BROADCAST_DRIVER:-log}"
+      - CACHE_DRIVER="${GPGL_CACHE_DRIVER:-redis}"
+      - SESSION_DRIVER="${GPGL_SESSION_DRIVER:-redis}"
+      - QUEUE_DRIVER="${GPGL_QUEUE_DRIVER:-sync}"
+      - REDIS_HOST="${GPGL_REDIS_HOST:-gpglredis}"
+      - REDIS_PORT="${GPGL_REDIS_PORT:-6379}"
+    volumes:
+      - gpglserver:/var/www/html/storage
+  gpglmysql:
+    container_name: gpgl_mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "${GPGL_MYSQL_ROOT_PASSWORD:-secret}"
+      MYSQL_DATABASE: "${GPGL_MYSQL_DATABASE:-homestead}"
+      MYSQL_USER: "${GPGL_MYSQL_USER:-homestead}"
+      MYSQL_PASSWORD: "${GPGL_MYSQL_PASSWORD:-secret}"
+    volumes:
+      - gpglmysql:/var/lib/mysql
+    networks:
+      - gpglnetwork
+  gpglredis:
+    container_name: gpgl_redis
+    image: redis:alpine
+    volumes:
+      - gpglredis:/data
+    networks:
+      - gpglnetwork
+networks:
+  gpglnetwork:
+    driver: "bridge"
+volumes:
+  gpglserver:
+    driver: "local"
+  gpglmysql:
+    driver: "local"
+  gpglredis:
+    driver: "local"
