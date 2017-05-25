@@ -14,3 +14,7 @@ CHANGELOG.md                    export-ignore
 release.bash                    export-ignore
 /docker                         export-ignore
 /server.php                     export-ignore
+.env.example                    export-ignore
+package.json                    export-ignore
+webpack.mix.js                  export-ignore
+yarn.lock                       export-ignore
