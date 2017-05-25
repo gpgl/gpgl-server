@@ -4,12 +4,11 @@ set -e
 
 # dependencies
 apt-get update && apt-get install -y \
-    wget curl \
-    apache2 libapache2-mod-php php php-mbstring php-zip php-mysql php-mcrypt
+    wget apache2 libapache2-mod-php php-mbstring php-zip php-mysql php-mcrypt
 
 # source
 mkdir -p /var/www/html/ && cd /var/www/html/
-curl -LO https://github.com/gpgl/server/archive/master.tar.gz
+wget https://github.com/gpgl/server/archive/master.tar.gz
 tar zxfv master.tar.gz --strip 1
 touch ./storage/logs/laravel.log
 chown -R www-data ./bootstrap/cache ./storage
@@ -28,18 +27,11 @@ mv composer.phar /usr/bin/composer
 rm composer-setup.php
 composer install --no-dev
 
-# node
-curl -L https://deb.nodesource.com/setup_7.x | bash -
-apt-get install -y nodejs
-npm install
-npm run prod
-rm -rf node_modules/
-
 # apache
 a2enmod ssl rewrite headers deflate
 
 # cleanup
-apt-get purge -y wget curl nodejs
+apt-get purge -y wget
 apt-get autoremove -y
 apt-get clean
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
