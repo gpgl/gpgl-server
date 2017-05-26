@@ -4,7 +4,7 @@ set -e
 
 # dependencies
 apt-get update && apt-get install -y \
-    wget apache2 libapache2-mod-php php-mbstring php-zip php-mysql php-mcrypt
+    wget netcat apache2 libapache2-mod-php php-mbstring php-zip php-mysql php-mcrypt
 
 # source
 mkdir -p /var/www/html/ && cd /var/www/html/
