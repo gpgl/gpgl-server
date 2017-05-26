@@ -29,6 +29,8 @@ composer install --no-dev
 
 # apache
 a2enmod ssl rewrite headers deflate
+cp /etc/ssl/certs/ssl-cert-snakeoil.pem   ./storage/ssl-public.pem
+cp /etc/ssl/private/ssl-cert-snakeoil.key ./storage/ssl-private.key
 
 # cleanup
 apt-get purge -y wget

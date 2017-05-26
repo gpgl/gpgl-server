@@ -2,6 +2,10 @@
 
 set -e
 
+openssl req -x509 -nodes -sha256 -days 3650 -subj '/CN=gpgl' -newkey rsa:2048 \
+    -keyout ./storage/ssl-private.key \
+    -out ./storage/ssl-public.pem
+
 echo 'waiting for mysql to come online'
 while ! nc -z gpglmysql $DB_PORT; do sleep 1; echo -n '.'; done
 

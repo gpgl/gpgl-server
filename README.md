@@ -24,6 +24,15 @@ There are also default environment variables which you can override.
 so if you override `GPGL_SERVER_PORT_SSL` then you should
 always connect directly to that port number.
 
+The setup script generates a self-signed SSL certificate key pair.
+If you would like to use your own certificate, then you can copy it into the
+running container and it will be persisted to volume storage.
+
+    docker-compose up -d
+    docker cp /path/to/public.pem  gpgl_server:/var/www/html/storage/ssl-public.pem
+    docker cp /path/to/private.key gpgl_server:/var/www/html/storage/ssl-private.key
+    docker-compose restart
+
 ## Manual Installation
 
 Follow the documentation for [installing a Laravel application][1].
